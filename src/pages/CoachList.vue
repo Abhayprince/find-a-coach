@@ -1,15 +1,21 @@
 <template>
-  <div>CoachList</div>
+  <div>
+    <coach-list-header></coach-list-header>
+  </div>
   <ul>
-    <li v-for="c in coaches" :key="c.name">
-      {{ c.name }}
+    <li v-for="c in filteredCoaches" :key="c.name">
+      <CoachItem :coach="c" />
     </li>
   </ul>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import CoachItem from "../components/coaches/CoachItem.vue";
+import CoachListHeader from "../components/coaches/CoachListHeader.vue";
+
 export default {
+  components: { CoachItem, CoachListHeader },
   props: [],
   emits: [],
   data: function () {
@@ -17,7 +23,7 @@ export default {
   },
   methods: {},
   computed: {
-    ...mapGetters(["coaches"]),
+    ...mapGetters(["filteredCoaches", "skills"]),
   },
   watch: {},
 };
